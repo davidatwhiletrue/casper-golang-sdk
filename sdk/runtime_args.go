@@ -96,6 +96,9 @@ func (v Value) ToBytes() []uint8 {
 		res = append(res, lenByteArray...)
 	} else if v.Tag == types.CLTypeOption {
 		res = append(res, uint8(v.Optional.Tag))
+	} else if v.Tag == types.CLTypeMap {
+		res = append(res, uint8(v.Map.KeyType))
+		res = append(res, uint8(v.Map.ValueType))
 	}
 
 	return res
