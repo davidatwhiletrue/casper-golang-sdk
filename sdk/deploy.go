@@ -126,7 +126,7 @@ func NewDeployParams(accountPublicKey keypair.PublicKey, chainName string, depen
 
 type Approval struct {
 	Signer    keypair.PublicKey `json:"signer"`
-	Signature keypair.Signature `json:"signature"`
+	Signature keypair.Signature `json:"signature,string"`
 }
 
 type DeployHeader struct {
@@ -518,7 +518,8 @@ func (m *ModuleBytes) UnmarshalModuleBytes(tempMap map[string]interface{}) error
 	if tempMap["module_bytes"] == nil {
 		m.ModuleBytes = make([]byte, 0)
 	} else {
-		m.ModuleBytes = []byte(tempMap["module_bytes"].(string))
+		mb, _ := hex.DecodeString(tempMap["module_bytes"].(string))
+		m.ModuleBytes = mb
 	}
 
 	if tempMap["args"] == nil {

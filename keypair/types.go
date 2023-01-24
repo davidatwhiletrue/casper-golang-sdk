@@ -94,3 +94,20 @@ func (signature Signature) MarshalJSON() ([]byte, error) {
 	}
 	return json.Marshal(hex.EncodeToString(w.Bytes()))
 }
+
+func (signature *Signature) UnmarshalJSON(data []byte) error {
+	var result string
+
+	if err := json.Unmarshal(data, &result); err != nil {
+		return err
+	}
+
+	resultHex, err := hex.DecodeString(result)
+	if err != nil {
+		return err
+	}
+
+	signature.Tag = KeyTag(resultHex[0])
+	signature.SignatureData = resultHex[1:]
+	return nil
+}
