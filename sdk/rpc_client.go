@@ -329,14 +329,14 @@ func (c *RpcClient) rpcCall(method string, params interface{}) (RpcResponse, err
 
 type RpcRequest struct {
 	Version string      `json:"jsonrpc"`
-	Id      string      `json:"id"`
+	Id      uint        `json:"id"`
 	Method  string      `json:"method"`
 	Params  interface{} `json:"params"`
 }
 
 type RpcResponse struct {
 	Version string          `json:"jsonrpc"`
-	Id      string          `json:"id"`
+	Id      uint64          `json:"id"`
 	Result  json.RawMessage `json:"result"`
 	Error   *RpcError       `json:"error,omitempty"`
 }
