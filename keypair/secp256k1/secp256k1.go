@@ -65,7 +65,7 @@ func (key *secp256k1KeyPair) AccountHash() string {
 
 	hash := blake2b.Sum256(buffer)
 
-	return fmt.Sprintf("account-hash-%s", hex.EncodeToString(hash[:]))
+	return hex.EncodeToString(hash[:])
 }
 
 func (key *secp256k1KeyPair) keys() (secp256k1.PubKey, secp256k1.PrivKey) {
@@ -79,6 +79,17 @@ func AccountHex(publicKey []byte) string {
 	dst := make([]byte, hex.EncodedLen(len(publicKey)))
 	hex.Encode(dst, publicKey)
 	return "02" + string(dst)
+}
+
+// AccountHex generates the accountHex for the Ed25519 public key
+func AccountHash(pubKey []byte) string {
+
+	var buffer = append([]byte(keypair.StrKeyTagSecp256k1), keypair.Separator)
+	buffer = append(buffer, pubKey...)
+
+	hash := blake2b.Sum256(buffer)
+
+	return fmt.Sprintf("account-hash-%s", hex.EncodeToString(hash[:]))
 }
 
 // ExportPublicKeyInPem exports the public key encoded in pem

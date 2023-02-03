@@ -445,13 +445,13 @@ type storedValueResult struct {
 }
 
 type StoredValue struct {
-	CLValue         *JsonCLValue          `json:"CLValue,omitempty"`
-	Account         *JsonAccount          `json:"Account,omitempty"`
-	Contract        *JsonContractMetadata `json:"Contract,omitempty"`
-	ContractWASM    *string               `json:"ContractWASM,omitempty"`
-	ContractPackage *string               `json:"ContractPackage,omitempty"`
-	Transfer        *TransferResponse     `json:"Transfer,omitempty"`
-	DeployInfo      *JsonDeployInfo       `json:"DeployInfo,omitempty"`
+	CLValue         *JsonCLValue                 `json:"CLValue,omitempty"`
+	Account         *JsonAccount                 `json:"Account,omitempty"`
+	Contract        *JsonContractMetadata        `json:"Contract,omitempty"`
+	ContractWASM    *string                      `json:"ContractWASM,omitempty"`
+	ContractPackage *JsonContractPackageMetadata `json:"ContractPackage,omitempty"`
+	Transfer        *TransferResponse            `json:"Transfer,omitempty"`
+	DeployInfo      *JsonDeployInfo              `json:"DeployInfo,omitempty"`
 }
 
 type JsonCLValue struct {
@@ -487,6 +487,10 @@ type JsonContractMetadata struct {
 	ContractPackageHash string `json:"contract_package_hash"`
 	ContractWasmHash    string `json:"contract_wasm_hash"`
 	ProtocolVersion     string `json:"protocol_version"`
+}
+
+type JsonContractPackageMetadata struct {
+	AccessKey string `json:"access_key"`
 }
 
 type JsonDeployInfo struct {
