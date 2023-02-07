@@ -435,9 +435,21 @@ type ExecutionResult struct {
 	ErrorMessage *string                `json:"error_message,omitempty"`
 }
 
+//type TransformValue struct {
+//}
+
+type Transform struct {
+	Key   string      `json:"key"`
+	Value interface{} `json:"transform"`
+}
+type ExecutionEffect struct {
+	Transforms []Transform `json:"transforms"`
+}
+
 type SuccessExecutionResult struct {
-	Transfers []string `json:"transfers"`
-	Cost      string   `json:"cost"`
+	Effect    ExecutionEffect `json:"effect"`
+	Transfers []string        `json:"transfers"`
+	Cost      string          `json:"cost"`
 }
 
 type storedValueResult struct {
