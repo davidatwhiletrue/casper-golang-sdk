@@ -501,8 +501,15 @@ type JsonContractMetadata struct {
 	ProtocolVersion     string `json:"protocol_version"`
 }
 
+type JsonContractVersion struct {
+	ProtocolVersionMajor uint64 `json:"protocol_version_major"`
+	ContractVersion      uint64 `json:"contract_version"`
+	ContractHash         string `json:"contract_hash"`
+}
+
 type JsonContractPackageMetadata struct {
-	AccessKey string `json:"access_key"`
+	AccessKey string                `json:"access_key"`
+	Versions  []JsonContractVersion `json:"versions"`
 }
 
 type JsonDeployInfo struct {
